@@ -1,0 +1,122 @@
+
+=== Resumo do funcionamento das MetaFeatures: ===
+
+O programa recebe como parâmetro o caminho para o arquivo XML de configuração, conforme o modelo enviado anexo (config_exemplo.xml).
+
+== A execução das métricas é descrita a seguir: ==
+
+= Filtragem Colaborativa: =
+
+As funções importantes das classes derivadas de CF.AbstractMetric são respectivamente itemValue, userValue e itemUserValue, que recebem um itemID e/ou userID e calculam o valor da métrica utilizando os ratings de um componente DataModelMC relacionados ao(s) ID(s) recebido(s). 
+
+As classes de Métricas foram importadas do software do Adriano.
+
+Métricas:
+
+a) CF.Metrics.QualitativeMetrics:
+
+GiniIndex:
+
+ Ratings são ordenados por valor.
+ sumOfRatings = A soma de todas as preferencias do ID
+ sum=
+ 	Para cada rating i:
+		sum += rating / sumOfRatings * (numero_de_ratings_daquele_ID - (i + 1) + 0.5) / numero_de_ratings_daquele_ID.
+
+ 	retorna 1-2*sum
+
+ Para o caso de ItemUser funciona da mesma maneira, mas é criado um vetor ordenado que contem os ratings tanto do itemID quanto do userId.
+
+PearsonCorrelation: 
+ *O nome da métrica está errado. Este é na verdade o coeficiente de variação, não o coeficiente de correlação.
+
+ Desvio padrao / Media dos vetores de ratings.
+
+ PQ-Mean:
+ É uma boa medida de esparsidade, que está implementada em uma multiplicação de dois somatórios segundo a fórumla presente em (Giancarlo Pstor 2015)(Ou: Ver texto da Monografia).
+
+	
+
+Usamos 
+	p = 1.0;
+	q = 3.0; 
+
+
+b)CF.Metricas.QuantitativeMetrics:
+
+LogOfDateRatings:
+
+	Na fase de pré-processamento é criado um conjunto (set) com as datas de cada item/user/item-user e guardado num hashmap.
+	No cálculo da métrica esses valores são recuperados um a um e é calculado o log2().
+
+LogOfQtdRatings:
+
+	O número de preferências de cada user/item é obtido direto do datamodel  e é calculado o log2(). 
+
+LogSdevDates:
+
+	Idêntico ao LogOfDateRatings, mas ao invés do log2, temos o desvio padrão:
+
+	Para cada valor de preferência:
+		soma += (media - valor)*(media - valor)
+	variancia = soma / numero de valores;
+	retorna sqrt(variancia)
+
+PrDateRatings:
+
+	Não entendi essa métrica. Durante o pré-processamento ele calcula um valor RP várias vezes, mas esses valores são perdidos, só o ultimo fica. Depois ele divide o LogOfDate por esse valor RP para obter o valor da métrica.
+
+ProportionOfRatings:
+
+	Obtem-se do DataModel o número de items, users ou i+u durante o pré-processamento. No cálculo da métrica esse valor divide o número de (users, itens ou a soma) com preferencia por cada (item e/ou user) obtido também do DataModel.
+
+ProportionOfCommonRatings:
+
+	Igual ao PCR, mas o valor dividido é o numero de itens que avaliaram um user (ou users que avaliaram um item, ou a soma) dividido pelo total. Esse valor de numerador é armazenado num HashMap durante o pré-processamento.
+
+RatingsMean:
+
+	Média simples: Para cada usuário/item somamos todas as suas preferências (obtidas em array do DataModel) e dividimos pelo total destas preferências. Para ItemUser o resultado é novamente a média das médias para Item e User.
+
+	
+= Filtragem Baseada em Conteúdo: =
+ 
+No caso da filtragem baseada em conteúdo, os dados devem ser previamente indexados por um processo específico, descrito no arquivo de configuração exemplo. 
+ 
+Os termos e as frequências de cada campo de cada documento são armazenados em hashmaps. Note que duas palavras identicas em dois campos diferentes são consideradas como dois termos distintos. As classes derivadas de CB.Metrics.AbstractMetric implementam as lógicas específicas de cada Metafeature:
+
+Entropy:
+	Na entropia primeiro é computada a soma de todas as frequências de termos.
+	Depois, para cada termo x calculamos:
+		p(x) = frequência(x) / soma_das_frequencias
+		soma_p = p(x)*log(p(x))
+	Retorna: -1 * soma_p
+
+Dice:
+	Para todo par de documentos é calculado o seguinte:
+	O tamanho da interseção, ou seja, número de termos que aparecem em ambos os documentos.
+	A interseção é implementada na classe TFVectorHashInt percorrendo os dois vetores de termos, que já vem ordenados, ao mesmo tempo, incrementando sempre termo "menor". (pior caso n^2).
+	Por fim retornamos 2*interseção / soma dos totais de termos.
+
+Jaccard:
+
+	Funciona da mesma maneira que o Dice, porém retornamos interseção / (soma dos totais de termos - interseção)
+	
+Cosine:
+	Para o cálculo do cosseno de cada par de documentos, multiplicamos as frequências dos termos comuns (produto), e em seguida computamos para cada documento a soma dos quadrados das frequencias de seus termos (soma_quadrados).
+
+	For fim retornamos: produto / sqrt( (soma_quadrados(a)*soma_quadrados(b)) )
+	
+SimilarRatingsMean:
+
+	Essa métrica é a media de similaridade dos documentos considerados similares (ou não similares), através de uma das métricas acima (cosine, dice ou jaccard). Então é computada a similaridade de cada par de documentos, e enfim calculada a média. 
+	Para considerar um valor similar um limiar ( > ou <= que o valor de cada similaridade) deve ser fornecido como parâmetro.
+
+SimilarRatingsSD:
+
+	Igual o anterior, porém ao inves de média, é calculado o desvio padrão dos valores considerados similares (ou não similares).  
+
+	
+
+
+

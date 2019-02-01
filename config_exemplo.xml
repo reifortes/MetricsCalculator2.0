@@ -1,0 +1,131 @@
+<?xml version='1.0'?>
+<!--
+	Instruções para uso do programa MetricsCalculator
+	
+	Uso:
+		java -jar MetricsCalculator.jar caminho_para_este_arquivo.xml
+
+(Seria util especificar também a memoria disponivel)
+-->
+<calculator>
+	<global> <!-- Parametros globais, sao usados na falta de parametro por processo. A omissão total de um parâmetro leva a um valor padrão -->
+		<doUser/> <!-- executar calculo por user -->
+		<doItem/> <!-- executar calculo por item -->
+		<doItemUser/> <!-- executar calculo por item e user (apenas CF) -->
+
+		<basePath>/home/carlos/BD/</basePath><!-- Diretorio onde o programa atua -->
+		<resourceFile>ratings.txt</resourceFile> <!-- arquivo com os ratings de entrada (CF), relativo ao basePath -->
+		<partitionLength>1</partitionLength> <!-- Tamanho do bloco de ratings que cada thread vai pegar por vez para processar (CF) -->
+		<outputFolder>Test1/</outputFolder>  <!-- Pasta onde escrever os arquivos de saida (relativa ao basePath) -->
+		
+		<bufferSize>2097152</bufferSize>     <!-- Tamanho do buffer de saida -->
+		<numThreads>0</numThreads>           <!-- Numero de threads de processamento. 0 leva ao total de threads da máquina -->
+		<useTextOutput /> 		     <!-- Saida em arquivos txt que podem ser lidos por humanos. A omissão deste parâmetro leva a saida em arquivos binários -->
+	</global>
+	
+	
+	<process>								<!-- Um processo corresponde a uma métrica a ser processada -->	
+		<type>collaborative</type>					<!-- Tipo: collaborative ou content-based (CF ou CB) -->
+		<metric>QualitativeMetrics.GiniIndex</metric>		        <!-- Nome da metrica: Tem que ser exatamente igual à classe da meta-feature implementada -->  
+		<basePath>/home/carlos/BD/</basePath>
+		
+		<doUser/>
+		<doItem/>
+		<doItemUser/>
+		<items>								<!-- Cada item corresponde a um bloco de Ids a terem suas métricas calculadas (arquivos txt) -->
+			<item>
+				<dataFile>ratingsNorm.txt</dataFile>		<!-- O dataFile contem todos os ratings, enquanto o resourceFile contem os ratings de onde vem os ids dos itens e users que serão calculados (implementação do Adriano). Em geral esses dois parâmetros serão idênticos -->
+				<resourceFile>ratingsNorm.txt</resourceFile>	
+				<outputFolder>Test1/</outputFolder>		 
+			</item>
+		</items>
+	</process>
+	
+
+	<!-- Métricas CF atualmente implementadas: -->
+
+	<!--
+
+	QualitativeMetrics.GiniIndex
+	QualitativeMetrics.PearsonCorrelation
+	QualitativeMetrics.PqMean
+	QualitativeMetrics.StandardDeviation
+	QuantitativeMetrics.LogOfDateRatings
+	QuantitativeMetrics.LogOfQtdRatings
+	QuantitativeMetrics.LogSdevDate >> Logaritimo do Desvio Padrão
+	QuantitativeMetrics.NormalizedProportionOfCommomRatings
+	QuantitativeMetrics.NormalizedProportionOfRatings
+	QuantitativeMetrics.PRDateRatings
+	QuantitativeMetrics.ProportionOfCommomRatings
+	QuantitativeMetrics.ProportionOfRatings
+	QuantitativeMetrics.RatingsMean >> Media dos ratings
+
+	-->
+
+	<process>
+		<type>content-based</type>
+		<index/>					<!-- A presença deste parâmetro em um processo CB indica que vamos fazer indexação dos dados pelo Lucene. Isto deve ser feito em um processo separado. O cálculo de métricas CB depende de existir uma indexação prévia -->
+		<basePath>/home/carlos/BD/</basePath>
+		<indexFolder>index-directory</indexFolder>      <!-- Diretorio onde criar o indice do Lucene, relativo ao basePath -->
+		<resourceFile>u.overview.genres</resourceFile>	<!-- Conteudo textual dos itens -->
+		<separatorCharacter>\|</separatorCharacter>     <!-- caractere separador dos campos de cada item no arquivo textual (se for | tem que ser escapado com \| ) -->
+		<numFields>3</numFields>			<!-- Quantidade de campos de cada item -->	
+		<startingField>2</startingField>		<!-- Campo inicial (os anteriores são ignorados, isto é util para pular o id, por exemplo) -->
+		
+		<useFirstLineAsTitle>0</useFirstLineAsTitle>    <!-- Caso a primeira linha do arquivo de entrada seja o nome dos campos e não conteudo -->
+
+		<doUser/><!-- Se queremos indexar também por usuario (conteudo textual do usuario = conteudo dos itens que ele avaliou com valor > userPreferenceTreshold) -->
+		<userPreferenceThreshold>0.5</userPreferenceThreshold>
+		<userPreferenceFile>ratingsNorm.txt</userPreferenceFile> <!-- arquivo de ratings para obter as avaliações de cada usuario -->
+	</process>
+	
+	<process>						<!-- Processo CB sem o parametro 'index' significa calculo de meta-feature CB -->
+		<doUser/>					
+		<doItem/> 
+		<type>content-based</type>
+		<metric>Entropy</metric>			<!-- Nome da metrica: Tem que ser exatamente igual à classe da meta-feature implementada -->  
+		<basePath>/home/carlos/BD/</basePath>
+		<outputFolder>Test2/</outputFolder>
+		<indexFolder>index-directory</indexFolder>	<!-- diretorio onde foi feita a indexação dos dados pelo Lucene -->
+		<numThreads>0</numThreads>
+		<metricParameter>				<!-- Algumas metricas podem possuir parametros especificos, que sao adicionados aqui atraves de id e valor, conforme descrito adiante --> 
+			<id>nomeParametro</id>
+			<value>valor</value>
+		</metricParameter>
+		<fields> <!-- Campos a serem utilizados no calculo. Omissao indica todos os campos -->
+			<field>1</field>
+			<field>2</field>
+			<field>3</field>
+		</fields>
+	</process>
+
+
+	<!-- Métricas CB atualmente implementadas: -->
+
+
+	<!--
+
+	Cosine
+	Dice
+	Jaccard
+	Entropy
+
+	SimilarRatingsMean >> Media de similaridade dos documentos considerados similares
+	SimilarRatingsSD >> Desvio padrao da similaridade dos documentos considerados similares
+	
+	Estas quatro ultimas metetricas dependem de dois parametros: -->
+		<metricParameter>
+			<id>similaritiyMetric</id> <!-- Metrica usada para calcular similaridade entre itens. 
+						Deve ser qualquer metrica que implemente a interface SimilarityMetric -->
+			<value>Cosine</value> 
+		</metricParameter>
+
+		<metricParameter>     
+			<id>treshold</id>   <!-- Valor limite para considerar dois documentos similares -->
+			<value>-0.5</value>  <!-- Valor negativo significa que serao considerados os valores menores que o threshold --> 
+		</metricParameter>
+	<!--
+
+	-->
+
+</calculator>
