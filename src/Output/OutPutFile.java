@@ -22,11 +22,13 @@ public class OutPutFile implements OutPut {
 	private int itemIDPosition;
 	private int userIDPosition;
 	private int valuePosition;
+	@SuppressWarnings("unused")
 	private int timePosition;
 	private int item2IDPosition;
 	private boolean existItem;
 	private boolean existUser;
 	private boolean existValue;
+	@SuppressWarnings("unused")
 	private boolean existTime;
 	private boolean existItem2;
 

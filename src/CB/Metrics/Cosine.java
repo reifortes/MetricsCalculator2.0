@@ -1,13 +1,11 @@
 package CB.Metrics;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.ecyrd.speed4j.StopWatch;
 
 import CB.TFVector;
 import Output.OutPut;
+
+import com.ecyrd.speed4j.StopWatch;
 
 public class Cosine extends AbstractMetric implements SimilarityMetric{
 
@@ -51,8 +49,10 @@ public class Cosine extends AbstractMetric implements SimilarityMetric{
 		//System.out.println("cosine");
 		double cosine;
 	
-    	TFVector tfvs0 = resource.getTermFreqVectors(a);
-	    TFVector tfvs1 = resource.getTermFreqVectors(b);
+    	@SuppressWarnings("rawtypes")
+		TFVector tfvs0 = resource.getTermFreqVectors(a);
+	    @SuppressWarnings("rawtypes")
+		TFVector tfvs1 = resource.getTermFreqVectors(b);
 	    
 	    int dotProduct = 0;
 	    int squareSum0 = 0;
@@ -71,7 +71,8 @@ public class Cosine extends AbstractMetric implements SimilarityMetric{
 	    	
 	    	if (resource.isIdFieldNumber(i)) continue; // skip id field, we don't want it in the calculations
 	    	
-	    	Comparable[] keys0 = tfvs0.getTerms(i);            // keys0 = terms of doc a
+	    	@SuppressWarnings("rawtypes")
+			Comparable[] keys0 = tfvs0.getTerms(i);            // keys0 = terms of doc a
 	    	int[] freqs0 = tfvs0.getTermFrequencies(i);	 // freqs0 = frequencies of doc a
 	    		    	
 	    	//String[] keys1 = tfvs1.getTerms(i);			 // keys1 = terms of doc b ---> not needed
@@ -80,7 +81,8 @@ public class Cosine extends AbstractMetric implements SimilarityMetric{
 	    	for (int j=0; j<keys0.length; j++)				 // for each term of doc a
 	    	{
 	    		//System.err.println("ooooh");
-	    		int freq1 = tfvs1.getFrequency(i, keys0[j]);	//get frequency for that term in doc b
+	    		@SuppressWarnings("unchecked")
+				int freq1 = tfvs1.getFrequency(i, keys0[j]);	//get frequency for that term in doc b
 	    		dotProduct = dotProduct + freq1 * freqs0[j];		//multiply those two frequencies and add to a sum	      
 	    	}
 	    	for (int k=0; k<freqs0.length; k++) // sum the square of all the frequencies in a

@@ -1,33 +1,24 @@
 
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.*;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.Term;
-
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.LockObtainFailedException;
-
-import com.ecyrd.speed4j.StopWatch;
 
 import CB.Indexer;
 import CB.Processor;
 import CB.Resource;
 import CB.Metrics.AbstractMetric;
 import CB.Metrics.MetricHandler;
-import CF.Producer_Consumer.ParallelElement.ResourceElement;
 import Measure.CPUTimer;
-import Measure.ProcessCPUTimer;
+
+import com.ecyrd.speed4j.StopWatch;
 
 
 public class ContentBasedCalculator {
@@ -138,7 +129,7 @@ public class ContentBasedCalculator {
 		IndexReader reader = DirectoryReader.open(directory);
 
 		//weird stuff to define the correct metric by class name:
-		Class cls = Class.forName("CB.Metrics."+metricClassName);
+		Class<?> cls = Class.forName("CB.Metrics."+metricClassName);
 		AbstractMetric metric = (AbstractMetric) cls.newInstance();
 		/* --- */
 		

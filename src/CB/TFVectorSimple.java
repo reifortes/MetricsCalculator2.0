@@ -222,7 +222,7 @@ public class TFVectorSimple implements TFVector<String>, java.io.Serializable{
 	}
 
 	@Override
-	public int intersection(TFVector<String> b, int idField) 
+	public int intersection(@SuppressWarnings("rawtypes") TFVector b, int idField) 
 	{
 		int posA =0;
 		int posB =0;
@@ -231,7 +231,7 @@ public class TFVectorSimple implements TFVector<String>, java.io.Serializable{
 		
 		while (posA != this.getNumTerms(idField) && posB !=b.getNumTerms(idField))
 		{
-			int comparison = this.getTerm(idField, posA).compareTo(b.getTerm(idField, posB));
+			int comparison = this.getTerm(idField, posA).compareTo((String) b.getTerm(idField, posB));
 			//System.out.println("comparison:"+comparison);
 			if(comparison == 0)
 			{

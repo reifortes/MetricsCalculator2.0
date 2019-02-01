@@ -1,11 +1,10 @@
 package CF.Metrics.QuantitativeMetrics;
 
 import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator;
 
+import CF.DataModel.DataModelMC;
 import CF.Metrics.Constant;
 import CF.Producer_Consumer.Preprocessing.ResourcePreprocessing;
-import CF.DataModel.DataModelMC;
 import Output.OutPutFile;
 
 public class NormalizedProportionOfCommomRatings extends ProportionOfCommomRatings {

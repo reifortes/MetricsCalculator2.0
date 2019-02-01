@@ -6,31 +6,20 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-
 import org.apache.lucene.document.FieldType;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.Fields;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.index.Terms;
-import org.apache.lucene.index.TermsEnum;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -39,17 +28,15 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.LockObtainFailedException;
-import org.apache.lucene.util.BytesRef;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator;
-import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
 
-import com.ecyrd.speed4j.*;
-
 import CF.DataModel.DataModelMC;
 import CF.DataModel.FileDataModelMC;
+
+import com.ecyrd.speed4j.StopWatch;
 
 public class Indexer {
 	
@@ -201,7 +188,7 @@ public class Indexer {
 		StopWatch stopwatch = new StopWatch();
 		stopwatch.start();
 		double threshold = userPreferenceThreshold;
-		boolean tresholdPercent = isUserPreferenceThresholdPercent;
+		//boolean tresholdPercent = isUserPreferenceThresholdPercent;
 		String filename = userPreferenceFile;
 		
 		FSDirectory directory;
@@ -332,9 +319,8 @@ public class Indexer {
 						/**/
 						
 						
-						List<IndexableField> fds = retrievedDocument.getFields();
-						
-						IndexableField fd = fds.get(0);
+						//List<IndexableField> fds = retrievedDocument.getFields();
+						//IndexableField fd = fds.get(0);
 						//System.out.println("field 0 name :"+fd.name());
 						
 						int j = 0; //pra pular o id

@@ -8,11 +8,13 @@ import com.sun.management.*;
 
 public class ProcessCPUTimer extends CPUTimer {
 
+	@SuppressWarnings("restriction")
 	private OperatingSystemMXBean osbean;
 	
 	private long _startProcessTime;
 	protected long processResult;
 	
+	@SuppressWarnings("restriction")
 	public ProcessCPUTimer(String name)
 	{
 		super(name);
@@ -40,7 +42,8 @@ public class ProcessCPUTimer extends CPUTimer {
     					    + "    elapsed time: "+elapsedResult+" ms");
     }
 	
-    private long getProcessTimeInMillis ()
+    @SuppressWarnings("restriction")
+	private long getProcessTimeInMillis ()
     {
         return TimeUnit.MILLISECONDS.convert(osbean.getProcessCpuTime(), TimeUnit.NANOSECONDS);
     }

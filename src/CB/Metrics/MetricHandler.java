@@ -1,16 +1,11 @@
 package CB.Metrics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.apache.lucene.index.IndexReader;
 
 import CB.Resource;
-import CB.Metrics.Metric;
 import Output.OutPutHandler;
 
 
@@ -90,7 +85,7 @@ public class MetricHandler {
 	public Resource createResources(IndexReader reader, boolean storeFreqsInMemory, LinkedList<Integer> fieldList) throws IOException{
 			Resource resource = new Resource(reader.maxDoc());
 			resource.storeFrequenciesInMemory(storeFreqsInMemory);
-			String sep = "\t";
+			//String sep = "\t";
 			// TODO: GET this option
 			if(doItem)
 				resource.setOutPut(outPutHandler.getOutFileItem()); //Usamos Item ou User, pois trata-se de CB

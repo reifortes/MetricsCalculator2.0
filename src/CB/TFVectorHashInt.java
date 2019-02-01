@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import org.apache.lucene.index.Fields;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.MultiFields;
@@ -52,7 +53,7 @@ public class TFVectorHashInt implements TFVector<Integer>{
 		if (staticNumFields == -1) // nao conseguiu por motivo desconhecido ler o numero de fields.
 		{
 			staticNumFields = 0;
-			for (String field : allFields)
+			for (@SuppressWarnings("unused") String field : allFields)
 			{
 				staticNumFields ++;
 			}
@@ -156,6 +157,7 @@ public class TFVectorHashInt implements TFVector<Integer>{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setTermFrequencyVectors(Fields docFields, boolean [] enabledFields) throws IOException 
 	{
 		
@@ -169,8 +171,8 @@ public class TFVectorHashInt implements TFVector<Integer>{
 		
 		Iterator<String> it = docFields.iterator();
 		
-		int chosenField = 0;
-		int candidateField = 0;
+		//int chosenField = 0;
+		//int candidateField = 0;
 		for (int l=0; l<numFields; l++) // for each field from doc
 		{
 			String field = it.next();
@@ -267,8 +269,8 @@ public class TFVectorHashInt implements TFVector<Integer>{
 				}
 			}
 			
-			chosenField++;
-			candidateField++;
+			//chosenField++;
+			//candidateField++;
 			
 		}
 	}
@@ -310,6 +312,7 @@ public class TFVectorHashInt implements TFVector<Integer>{
 			int currentNumFields = getNumFields();
 			int[] fixedLength = new int[fixedNumFields];
 			int[][] fixedFreqs = new int[fixedNumFields][];
+			@SuppressWarnings("unchecked")
 			Map<Integer, Integer>[] fixedTermFreqMaps = (Map<Integer, Integer>[]) new Map[fixedNumFields];
 			Integer[][] fixedTerms = new Integer[fixedNumFields][];
 			for (int i=0; i<fixedNumFields; i++)
@@ -367,7 +370,7 @@ public class TFVectorHashInt implements TFVector<Integer>{
 	
 	
 	@Override
-	public int intersection(TFVector<Integer> b, int idField) { // terms MUST be ordered
+	public int intersection(@SuppressWarnings("rawtypes") TFVector b, int idField) { // terms MUST be ordered
 		int posA =0;
 		int posB =0;
 		int count = 0;
@@ -375,7 +378,7 @@ public class TFVectorHashInt implements TFVector<Integer>{
 		int comparison;
 		while (posA != this.getNumTerms(idField) && posB !=b.getNumTerms(idField))
 		{
-			comparison = this.getTerm(idField, posA).compareTo(b.getTerm(idField, posB));
+			comparison = this.getTerm(idField, posA).compareTo((Integer) b.getTerm(idField, posB));
 			//System.out.println("comparison:"+comparison);
 			if(comparison == 0)
 			{

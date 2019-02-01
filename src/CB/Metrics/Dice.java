@@ -39,8 +39,8 @@ public class Dice extends AbstractMetric implements SimilarityMetric{
 
 	double getDice(int a, int b) throws IOException{ 	
     	
-    	TFVector tfvs0 = resource.getTermFreqVectors(a);
-	    TFVector tfvs1 = resource.getTermFreqVectors(b);
+    	TFVector<?> tfvs0 = resource.getTermFreqVectors(a);
+	    TFVector<?> tfvs1 = resource.getTermFreqVectors(b);
 	    
 	    if(tfvs0 == null || tfvs1 == null) // in case of empty item
 	    {
@@ -52,7 +52,7 @@ public class Dice extends AbstractMetric implements SimilarityMetric{
 	    int total0 = 0;
 	    int total1 = 0;
 	    
-	    double diceSum = 0.0;
+	    //double diceSum = 0.0;
 	    
 	    for (int i=0; i<tfvs0.getNumFields() && i<tfvs1.getNumFields(); i++) // for each common field
 	    {	

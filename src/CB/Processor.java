@@ -1,11 +1,7 @@
 package CB;
 
-import java.io.IOException;
-
 import org.apache.lucene.index.IndexReader;
 //import org.apache.lucene.index.TermFreqVector;
-
-import com.ecyrd.speed4j.StopWatch;
 
 import CB.Metrics.Metric;
 import Measure.CPUTimer;

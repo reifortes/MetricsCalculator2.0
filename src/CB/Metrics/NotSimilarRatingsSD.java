@@ -1,17 +1,13 @@
 package CB.Metrics;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.mahout.cf.taste.model.Preference;
-import org.apache.mahout.cf.taste.model.PreferenceArray;
+import Output.OutPut;
 
 import com.ecyrd.speed4j.StopWatch;
-
-import Output.OutPut;
 
 public class NotSimilarRatingsSD extends AbstractMetric {
 
@@ -24,7 +20,7 @@ public class NotSimilarRatingsSD extends AbstractMetric {
 		//System.err.println("parameter "+id+" "+value);
 		if (id.compareTo("similarityMetric") == 0)
 		{
-			Class cls;
+			Class<?> cls;
 			try 
 			{
 				cls = Class.forName("CB.Metrics."+value);

@@ -33,7 +33,8 @@ public class OutPutHandler {
 		private boolean doItemUser = false;
 		private boolean doItemItem = false;
 		
-		private boolean useMemoryMapping = true;
+		//private boolean useMemoryMapping = true;
+		@SuppressWarnings("unused")
 		private int numOfRegisters = 0;
 		/* -- */
 		

@@ -2,14 +2,11 @@ package CB;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.Fields;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.MultiFields;
 
 import CB.Metrics.Metric;
@@ -50,7 +47,7 @@ public class Resource {
 		this.metric = metric;
 	}
 
-	public void setReader(IndexReader r, List fieldList) throws CorruptIndexException, IOException
+	public void setReader(IndexReader r, List<Integer> fieldList) throws CorruptIndexException, IOException
 	{
 		reader = r;
 		setFieldInfo(fieldList);
@@ -153,7 +150,7 @@ public class Resource {
 	{
 		Runtime runtime = Runtime.getRuntime();
 		long heapMaxSize = runtime.maxMemory();
-		long heapSize = runtime.totalMemory();
+		//long heapSize = runtime.totalMemory();
 		long usedHeap = runtime.totalMemory() - runtime.freeMemory();
 		return (heapMaxSize - usedHeap)/1000000;
 	}
@@ -162,7 +159,7 @@ public class Resource {
 	{
 		Runtime runtime = Runtime.getRuntime();
 		long heapMaxSize = runtime.maxMemory();
-		long heapSize = runtime.totalMemory();
+		//long heapSize = runtime.totalMemory();
 		long usedHeap = runtime.totalMemory() - runtime.freeMemory();
 		return ((heapMaxSize - usedHeap) *100 ) / heapMaxSize;
 	}
@@ -179,7 +176,7 @@ public class Resource {
 		if (numFields <0 )  // nao conseguiu por motivo desconhecido ler o numero de fields.
 		{
 			numFields = 0;
-			for (String field : allFields)
+			for (@SuppressWarnings("unused") String field : allFields)
 			{
 				numFields ++;
 			}
@@ -321,7 +318,7 @@ public class Resource {
 		System.out.println("Max used memory for preparation:"+maxMemoryConsumption);
 	}
 	
-	public TFVector getTermFreqVectors(int n)
+	public TFVector<?> getTermFreqVectors(int n)
 	{
 		if(termFreqVector[n] != null) 
 			/* reading freqs from the memory: */

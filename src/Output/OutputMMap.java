@@ -3,14 +3,13 @@ package Output;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 
 
 public class OutputMMap implements OutPut {
 	
-	private String outPutString;
+	//private String outPutString;
 	private long startT;
 	private long endT;
 	private File file;
@@ -25,6 +24,7 @@ public class OutputMMap implements OutPut {
 	private FileChannel fileChannel;
 	private MappedByteBuffer mappedByteBuffer;
 
+	@SuppressWarnings("resource")
 	public OutputMMap(String fileName, String header, String outPutString, int bufferSize, boolean overwrite, String nullValue, int numWords) throws IOException 
 	{
 		super();	

@@ -88,7 +88,8 @@ public class RatingsMean extends AbstractMetric {
 	@Override
 	public Double userValue(long userID) 
 	{
-		ArrayList<Long> dates = new ArrayList();
+		@SuppressWarnings("unused")
+		ArrayList<Long> dates = new ArrayList<Long>();
 		try 
 		{
 			return media(getModel().getPreferencesFromUser(userID));
@@ -107,7 +108,8 @@ public class RatingsMean extends AbstractMetric {
 	@Override
 	public Double itemUserValue(long itemID, long userID) 
 	{
-		ArrayList<Long> dates = new ArrayList();	
+		@SuppressWarnings("unused")
+		ArrayList<Long> dates = new ArrayList<Long>();	
 		return ( itemValue(itemID) + userValue(userID) ) / 2.0;
 	}
 

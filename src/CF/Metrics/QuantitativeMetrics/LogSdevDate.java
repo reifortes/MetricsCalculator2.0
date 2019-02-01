@@ -2,7 +2,6 @@ package CF.Metrics.QuantitativeMetrics;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.mahout.cf.taste.common.NoSuchItemException;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -88,7 +87,7 @@ public class LogSdevDate extends AbstractMetric {
 	@Override
 	public Double itemValue(long itemID) 
 	{
-		ArrayList<Long> dates = new ArrayList();
+		ArrayList<Long> dates = new ArrayList<Long>();
 		try 
 		{
 			for(Preference pref : getModel().getPreferencesForItem(itemID)) 
@@ -112,7 +111,7 @@ public class LogSdevDate extends AbstractMetric {
 	@Override
 	public Double userValue(long userID) 
 	{
-		ArrayList<Long> dates = new ArrayList();
+		ArrayList<Long> dates = new ArrayList<Long>();
 		try 
 		{
 			for(Preference pref : getModel().getPreferencesFromUser(userID)) 
@@ -136,7 +135,7 @@ public class LogSdevDate extends AbstractMetric {
 	@Override
 	public Double itemUserValue(long itemID, long userID) 
 	{
-		ArrayList<Long> dates = new ArrayList();
+		ArrayList<Long> dates = new ArrayList<Long>();
 		try 
 		{
 			for(Preference pref : getModel().getPreferencesForItem(itemID)) 

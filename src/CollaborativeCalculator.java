@@ -1,32 +1,19 @@
 
 import java.io.File;
-
 import java.io.IOException;
-
 
 import org.apache.mahout.cf.taste.common.TasteException;
 
-
-//import org.apache.log4j.BasicConfigurator;
-
-
-import com.ecyrd.speed4j.StopWatch;
-
-import CF.Metrics.*;
-import CF.Metrics.Constant.MetricEnum;
-import CF.Metrics.Constant.VersionElementMetricEnum;
-import CF.Metrics.QualitativeMetrics.*;
-import CF.Metrics.QuantitativeMetrics.*;
+import CF.DataModel.DataModelMC;
+import CF.DataModel.FileDataModelMC;
+import CF.Metrics.AbstractMetric;
+import CF.Metrics.MetricHandler;
 import CF.Producer_Consumer.ParallelElement.ConsumerElement;
-import CF.Producer_Consumer.ParallelElement.RegisterElement;
 import CF.Producer_Consumer.ParallelElement.ResourceElement;
 import CF.Producer_Consumer.Preprocessing.ResourcePreprocessing;
 import Measure.CPUTimer;
-import CF.DataModel.DataModelMC;
-import CF.DataModel.FileDataModelMC;
-import Output.OutPut;
 import Output.OutPutFile;
-
+//import org.apache.log4j.BasicConfigurator;
 import com.ecyrd.speed4j.StopWatch;
 
 public class CollaborativeCalculator {
@@ -93,11 +80,11 @@ public class CollaborativeCalculator {
 		
 		// Precisamos mesmo disso?
 		OutPutFile outFileIO = null;//new OutPutFile(pathLog + "Geral.txt", "metrica; tipo; tempo", "#itemID#; #value#; #time#", 1000000, true, "NULL");
-		OutPutFile outPutPreProcessing = null;// ver createResourcepreprocessing new OutPutFile(pathLog + "OutPut_Preprocessing.txt", "metrica; tipo; tempo", "#itemID#; #value#; #time#", 100000, true, "NULL");
+		//OutPutFile outPutPreProcessing = null;// ver createResourcepreprocessing new OutPutFile(pathLog + "OutPut_Preprocessing.txt", "metrica; tipo; tempo", "#itemID#; #value#; #time#", 100000, true, "NULL");
 		/* --- */
 		
 		//weird stuff to define the correct metric by class name:
-		Class cls = Class.forName("CF.Metrics."+metricClassName);
+		Class<?> cls = Class.forName("CF.Metrics."+metricClassName);
 		AbstractMetric metric = (AbstractMetric) cls.newInstance();
 		metric.setModel(datamodelmc);
 		/* --- */

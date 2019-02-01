@@ -284,7 +284,7 @@ public class TFVectorInteger implements TFVector<Integer>{
 		}
 
 	@Override
-	public int intersection(TFVector<Integer> b, int idField) { // terms MUST be ordered
+	public int intersection(@SuppressWarnings("rawtypes") TFVector b, int idField) { // terms MUST be ordered
 		int posA =0;
 		int posB =0;
 		int count = 0;
@@ -292,7 +292,7 @@ public class TFVectorInteger implements TFVector<Integer>{
 		int comparison;
 		while (posA != this.getNumTerms(idField) && posB !=b.getNumTerms(idField))
 		{
-			comparison = this.getTerm(idField, posA).compareTo(b.getTerm(idField, posB));
+			comparison = this.getTerm(idField, posA).compareTo((Integer) b.getTerm(idField, posB));
 			//System.out.println("comparison:"+comparison);
 			if(comparison == 0)
 			{

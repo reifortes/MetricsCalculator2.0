@@ -258,7 +258,7 @@ public class TFVectorLuceneTFV implements TFVector<String> {
 	
 	
 	@Override
-	public int intersection(TFVector<String> b, int idField) // terms MUST be ordered
+	public int intersection(@SuppressWarnings("rawtypes") TFVector b, int idField) // terms MUST be ordered
 	{
 		int posA =0;
 		int posB =0;
@@ -267,7 +267,7 @@ public class TFVectorLuceneTFV implements TFVector<String> {
 		int comparison;
 		while (posA != this.getNumTerms(idField) && posB !=b.getNumTerms(idField))
 		{
-			comparison = this.getTerm(idField, posA).compareTo(b.getTerm(idField, posB));
+			comparison = this.getTerm(idField, posA).compareTo((String) b.getTerm(idField, posB));
 			//System.out.println("comparison:"+comparison);
 			if(comparison == 0)
 			{

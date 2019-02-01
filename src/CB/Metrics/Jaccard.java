@@ -39,8 +39,8 @@ public class Jaccard extends AbstractMetric implements SimilarityMetric{
     	    	
 		//System.out.println("Jaccard "+a+", "+b);
 		
-    	TFVector tfvs0 = resource.getTermFreqVectors(a);
-	    TFVector tfvs1 = resource.getTermFreqVectors(b);
+    	TFVector<?> tfvs0 = resource.getTermFreqVectors(a);
+	    TFVector<?> tfvs1 = resource.getTermFreqVectors(b);
 	    
 	    if(tfvs0 == null || tfvs1 == null) // in case of empty item
 	    {

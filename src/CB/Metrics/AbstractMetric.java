@@ -63,7 +63,7 @@ public abstract class AbstractMetric implements Metric
 	}
 	
 	//old
-	public int intersection(TFVector a, TFVector b, int idField) // Arrays must be ordered! lucene gives them ordered
+	public int intersection(@SuppressWarnings("rawtypes") TFVector a, @SuppressWarnings("rawtypes") TFVector b, int idField) // Arrays must be ordered! lucene gives them ordered
 	{
 		int posA =0;
 		int posB =0;
@@ -72,6 +72,7 @@ public abstract class AbstractMetric implements Metric
 		
 		while (posA != a.getNumTerms(idField) && posB !=b.getNumTerms(idField))
 		{
+			@SuppressWarnings("unchecked")
 			int comparison = a.getTerm(idField, posA).compareTo(b.getTerm(idField, posB));
 			//System.out.println("comparison:"+comparison);
 			if(comparison == 0)

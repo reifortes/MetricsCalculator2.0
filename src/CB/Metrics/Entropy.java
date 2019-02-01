@@ -2,14 +2,12 @@ package CB.Metrics;
 
 import java.io.IOException;
 
-//import org.apache.lucene.index.TermFreqVector;
-import org.apache.lucene.index.Terms;
-
-import com.ecyrd.speed4j.StopWatch;
-
 import CB.Resource;
 import CB.TFVector;
 import Output.OutPut;
+
+import com.ecyrd.speed4j.StopWatch;
+//import org.apache.lucene.index.TermFreqVector;
 
 /*
  * 
@@ -87,20 +85,20 @@ double getEntropy(int a) throws IOException
 	{ 	
     	
 		double sum = 0.0;
-    	TFVector tfvs0 = resource.getTermFreqVectors(a);
+    	TFVector<?> tfvs0 = resource.getTermFreqVectors(a);
     	if(tfvs0 == null) // in case of empty item
 	    {
 	    	//System.err.println("Warning: empty item "+a+" or "+b);
 	    	return 0.0;
 	    }
 	    
-    	int total_terms = 0;
+    	//int total_terms = 0;
     	double freq_sum = 0;
     	for (int i=0; i<tfvs0.getNumFields(); i++) // for each field... 
 	    {
     		if (resource.isIdFieldNumber(i)) continue; // skip id field, we don't want it in the calculations
     		
-    		total_terms += tfvs0.getNumTerms(i); // computing "n".
+    		//total_terms += tfvs0.getNumTerms(i); // computing "n".
     		
 	    	int[] freqs = tfvs0.getTermFrequencies(i); // get term frequencies array.
 	    	for (int j=0; j<freqs.length; j++)
