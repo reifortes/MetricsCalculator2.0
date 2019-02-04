@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import CB.Resource;
 import Output.OutPut;
 
 import com.ecyrd.speed4j.StopWatch;
@@ -65,7 +66,7 @@ public class SimilarRatingsSD extends AbstractMetric {
 	@Override
 	public String getMetricNameID() 
 	{
-		return "SimilarRatingsSD";
+		return "SR_SD-" + simMetric.getMetricNameID() + (maiorIgual ? "-Abv" : "-Blw");
 	}
 	
 	@Override
@@ -127,6 +128,12 @@ public class SimilarRatingsSD extends AbstractMetric {
 		
 	}
 	
+	@Override
+	public void setResource(Resource r)
+	{
+		resource = r;
+		simMetric.setResource(resource);
+	}
 	
 
 }

@@ -2,6 +2,7 @@ package CB.Metrics;
 
 import java.io.IOException;
 
+import CB.Resource;
 import Output.OutPut;
 
 import com.ecyrd.speed4j.StopWatch;
@@ -62,7 +63,7 @@ public class SimilarRatingsMean extends AbstractMetric {
 	@Override
 	public String getMetricNameID() 
 	{
-		return "SimilarRatingsMean";
+		return "SR_M-" + simMetric.getMetricNameID() + (maiorIgual ? "-Abv" : "-Blw");
 	}
 	
 	@Override
@@ -99,6 +100,13 @@ public class SimilarRatingsMean extends AbstractMetric {
 			}
 		}
 		return sum/count;
+	}
+	
+	@Override
+	public void setResource(Resource r)
+	{
+		resource = r;
+		simMetric.setResource(resource);
 	}
 
 }

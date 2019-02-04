@@ -135,16 +135,16 @@ public class ContentBasedCalculator {
 		
 		MetricHandler metricHandler = new MetricHandler(metric);
 		metricHandler.setParameters(doi, dou, false, false);
-		metricHandler.createOutPut(pathBase+outputFolder, bufferSize, useTxtOutput);
-		
-		Resource resource = metricHandler.createResources(reader, storeFreqsInMemory, fieldList);
-		metric.setResource(resource);
 		
 		for(int k=0; k<numParameters; k++)
 		{
 			metric.setParameter(parameterIds.get(k), parameterValues.get(k));
 		}
 		
+		metricHandler.createOutPut(pathBase+outputFolder, bufferSize, useTxtOutput);
+		Resource resource = metricHandler.createResources(reader, storeFreqsInMemory, fieldList);
+		metric.setResource(resource);
+
 		stepwatch.stop();
 		System.out.println("Reading and preparation time: "+ stepwatch.toString());	
 		stepwatch.start();
