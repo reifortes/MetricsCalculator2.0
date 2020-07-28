@@ -63,7 +63,7 @@ public class SimilarRatingsMean extends AbstractMetric {
 	@Override
 	public String getMetricNameID() 
 	{
-		return "SR_M-" + simMetric.getMetricNameID() + (maiorIgual ? "-Abv" : "-Blw");
+		return "cb_Mean_" + simMetric.getMetricNameID().replace("cb_", "") + (maiorIgual ? "_Abv" : "_Blw");
 	}
 	
 	@Override

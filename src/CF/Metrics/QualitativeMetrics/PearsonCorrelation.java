@@ -146,7 +146,7 @@ public class PearsonCorrelation extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "PearsonCorrelation";
+		return "cf_Pearson";
 	}
 
 }

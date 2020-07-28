@@ -13,7 +13,7 @@ public class Dice extends AbstractMetric implements SimilarityMetric{
 
 	@Override
 	public String getMetricNameID() {
-		return "Dice";
+		return "cb_Dice";
 	}
 
 	@Override

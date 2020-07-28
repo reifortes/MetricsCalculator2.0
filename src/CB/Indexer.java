@@ -303,7 +303,7 @@ public class Indexer {
 						
 						if(td.totalHits != 1) 
 						{
-							System.err.println("Error: Total hits for item id "+p.getItemID()+" = "+td.totalHits+" (user id "+uid+") ");
+							////System.err.println("Error: Total hits for item id "+p.getItemID()+" = "+td.totalHits+" (user id "+uid+") ");
 							continue;
 						}
 						
@@ -335,7 +335,7 @@ public class Indexer {
 
 						/* --- */
 					    
-					    if (td.totalHits > 1) System.err.println("Error: total hits > 1 for user " + uid);
+					    ////if (td.totalHits > 1) System.err.println("Error: total hits > 1 for user " + uid);
 						
 					}
 				}	

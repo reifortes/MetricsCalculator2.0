@@ -56,7 +56,7 @@ public class LogSdevDate extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "LogSdevDate";
+		return "cf_LogSdevDate";
 	}
 	
 	public Double desvioPadrao(ArrayList<Long> list)

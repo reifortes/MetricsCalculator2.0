@@ -14,7 +14,7 @@ public class Jaccard extends AbstractMetric implements SimilarityMetric{
 
 	@Override
 	public String getMetricNameID() {
-		return "Jaccard";
+		return "cb_Jaccard";
 	}
 
 	@Override

@@ -73,7 +73,7 @@ public class LogOfQtdRatings extends AbstractMetric {
 	}
 	
 	public String getMetricNameID() {
-		return "LogOfAmountRatings";
+		return "cf_LogOfAmountRatings";
 	}
 
 }

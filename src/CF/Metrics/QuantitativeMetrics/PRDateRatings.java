@@ -104,7 +104,7 @@ public class PRDateRatings extends LogOfDateRatings {
 	}
 	
 	public String getMetricNameID() {
-		return "PRDateRatings";
+		return "cf_PRDateRatings";
 	}
 
 }

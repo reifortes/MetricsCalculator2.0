@@ -12,7 +12,7 @@ public class Cosine extends AbstractMetric implements SimilarityMetric{
 
 	@Override
 	public String getMetricNameID() {
-		return "Cosine";
+		return "cb_Cosine";
 	}
 
 	
@@ -120,11 +120,11 @@ public class Cosine extends AbstractMetric implements SimilarityMetric{
 	    	//if (cosine > 1.1 || cosine != cosine)
 	    	{
 		    	System.err.println("Error: cosine ("+a+", "+b+") = "+cosine);
-		    	System.err.println("dot Product: "+dotProduct);
-		    	System.err.println("Square sum A: "+squareSum0);
-		    	System.err.println("Square sum B: "+squareSum1);
-		    	System.err.println("srqt (Square sum A): "+java.lang.Math.sqrt(squareSum0));
-		    	System.err.println("sqrt (Square sum B): "+java.lang.Math.sqrt(squareSum1));
+		    	////System.err.println("dot Product: "+dotProduct);
+		    	////System.err.println("Square sum A: "+squareSum0);
+		    	////System.err.println("Square sum B: "+squareSum1);
+		    	////System.err.println("srqt (Square sum A): "+java.lang.Math.sqrt(squareSum0));
+		    	////System.err.println("sqrt (Square sum B): "+java.lang.Math.sqrt(squareSum1));
 		    	//System.err.println("A:\n"+tfvs0.toString());
 		    	//System.err.println("A:\n"+tfvs1.toString());
 	    	}

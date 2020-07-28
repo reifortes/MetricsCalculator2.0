@@ -131,7 +131,7 @@ public class GiniIndex extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "Gini";
+		return "cf_Gini";
 	}
 
 	

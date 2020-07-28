@@ -50,7 +50,7 @@ public class RatingsMean extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "LogSdevDate";
+		return "cf_Mean";
 	}
 	
 	public Double media(PreferenceArray preferenceArray)

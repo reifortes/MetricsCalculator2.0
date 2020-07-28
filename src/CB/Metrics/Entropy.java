@@ -49,7 +49,7 @@ public class Entropy extends AbstractMetric{
 	
 	@Override
 	public String getMetricNameID() {
-		return "Entropy";
+		return "cb_Entropy";
 	}
 
 	@Override

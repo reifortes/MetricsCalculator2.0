@@ -48,7 +48,7 @@ public class CountSize extends AbstractMetric{
 	
 	@Override
 	public String getMetricNameID() {
-		return "CountSize";
+		return "cb_CountSize";
 	}
 
 	@Override

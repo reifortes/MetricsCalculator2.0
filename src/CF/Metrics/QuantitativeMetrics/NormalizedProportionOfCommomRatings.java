@@ -90,6 +90,6 @@ public class NormalizedProportionOfCommomRatings extends ProportionOfCommomRatin
 	
 	@Override
 	public String getMetricNameID() {
-		return "NormalizedProportionOfCommonRatings";
+		return "cf_NPCR";
 	}
 }

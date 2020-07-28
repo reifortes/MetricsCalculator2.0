@@ -104,7 +104,7 @@ public class ProportionOfRatings extends AbstractMetric {
 	}
 	
 	public String getMetricNameID() {
-		return "ProportionOfRatings";
+		return "cf_PR";
 	}
 	
 }

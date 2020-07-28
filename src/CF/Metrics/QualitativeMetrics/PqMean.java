@@ -154,7 +154,7 @@ public class PqMean extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "PQMean";
+		return "cf_PqMean";
 	}
 
 }

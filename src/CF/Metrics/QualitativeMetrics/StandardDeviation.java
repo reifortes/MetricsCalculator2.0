@@ -111,7 +111,7 @@ public class StandardDeviation extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "StandardDeviation";
+		return "cf_SD";
 	}
 
 }

@@ -157,7 +157,7 @@ public class ProportionOfCommomRatings extends AbstractMetric {
 
 	@Override
 	public String getMetricNameID() {
-		return "ProportionOfCommonRatings";
+		return "cf_PCR";
 	}
 	
 	@Override

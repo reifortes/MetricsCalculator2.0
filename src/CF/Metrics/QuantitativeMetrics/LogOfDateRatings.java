@@ -151,7 +151,7 @@ public class LogOfDateRatings extends AbstractMetric {
 	}
 	
 	public String getMetricNameID() {
-		return "LogOfDateRatings";
+		return "cf_LogOfDateRatings";
 	}
 
 }

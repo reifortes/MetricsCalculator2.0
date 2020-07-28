@@ -97,19 +97,18 @@ public class OutPutHandler {
 						//outPutIO = new OutPutFile(basePath+metricName+"_IO.txt", ioHeaderString, ioOutputString, bufferSize, overwrite, nullValue);
 						if (outputTxt)
 						{
-							if(doItem) outFileItem = new OutPutFile(basePath+metricName+"-01-Itemt.txt", itemHeaderString, itemOutputString, bufferSize, overwrite, nullValue);
-							if(doUser) outFileUser= new OutPutFile(basePath+metricName+"-02-Usert.txt", userHeaderString, userOutputString, bufferSize, overwrite, nullValue);
-							if(doItemUser) outFileItemUser = new OutPutFile(basePath+metricName+"-03-ItemUsert.txt", itemUserHeaderString, itemUserOutputString, bufferSize, overwrite, nullValue);
-							if(doItemItem) outFileItemItem = new OutPutFile(basePath+metricName+"-03-ItemItemt.txt", itemItemHeaderString, itemItemOutputString, bufferSize, overwrite, nullValue);
+							if(doItem) outFileItem = new OutPutFile(basePath+metricName+"_Item.txt", itemHeaderString, itemOutputString, bufferSize, overwrite, nullValue);
+							if(doUser) outFileUser= new OutPutFile(basePath+metricName+"_Usert.txt", userHeaderString, userOutputString, bufferSize, overwrite, nullValue);
+							if(doItemUser) outFileItemUser = new OutPutFile(basePath+metricName+"_ItemUsert.txt", itemUserHeaderString, itemUserOutputString, bufferSize, overwrite, nullValue);
+							if(doItemItem) outFileItemItem = new OutPutFile(basePath+metricName+"_ItemItemt.txt", itemItemHeaderString, itemItemOutputString, bufferSize, overwrite, nullValue);
 						}
 						
 						else
 						{
-							if(doItem) outFileItem = new OutputMMap(basePath+metricName+"-01-Item.txt", itemHeaderString, itemOutputString, bufferSize, overwrite, nullValue, 3);
-							if(doUser) outFileUser= new OutputMMap(basePath+metricName+"-02-User.txt", userHeaderString, userOutputString, bufferSize, overwrite, nullValue, 3);
-							if(doItemUser) outFileItemUser = new OutputMMap(basePath+metricName+"-03-ItemUser.txt", itemUserHeaderString, itemUserOutputString, bufferSize, overwrite, nullValue, 4);
-							
-							if(doItemItem) outFileItemItem = new OutputMMap(basePath+metricName+"-03-ItemItem.txt", itemItemHeaderString, itemItemOutputString, bufferSize, overwrite, nullValue, 4);
+							if(doItem) outFileItem = new OutputMMap(basePath+metricName+"_Item.txt", itemHeaderString, itemOutputString, bufferSize, overwrite, nullValue, 3);
+							if(doUser) outFileUser= new OutputMMap(basePath+metricName+"_User.txt", userHeaderString, userOutputString, bufferSize, overwrite, nullValue, 3);
+							if(doItemUser) outFileItemUser = new OutputMMap(basePath+metricName+"_ItemUser.txt", itemUserHeaderString, itemUserOutputString, bufferSize, overwrite, nullValue, 4);
+							if(doItemItem) outFileItemItem = new OutputMMap(basePath+metricName+"_ItemItem.txt", itemItemHeaderString, itemItemOutputString, bufferSize, overwrite, nullValue, 4);
 						}
 		}	
 		public void finishOutput() throws IOException

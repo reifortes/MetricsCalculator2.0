@@ -57,7 +57,7 @@ public class NormalizedProportionOfRatings extends ProportionOfRatings {
 
 	@Override
 	public String getMetricNameID() {
-		return "NormalizedProportionOfRatings";
+		return "cf_NPR";
 	}
 	
 	@Override
